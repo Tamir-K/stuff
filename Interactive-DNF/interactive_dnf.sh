@@ -1,7 +1,11 @@
 #!/usr/bin/bash
+
 readonly basename="$(basename "$0")"
 
-command -v fzf >/dev/null 2>&1 || { printf 'Error: Missing dep: fzf is required to use %s.\n' "${basename}" >&2; exit 64; }
+if ! command -v fzf >/dev/null 2>&1; then
+    printf "Error: Missing dep: fzf is required to use ${basename}.\n" >&2
+    exit 64
+fi
 
 #Colors
 declare -r esc=$'\033'

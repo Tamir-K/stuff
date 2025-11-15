@@ -142,3 +142,6 @@ I ran a benchmark using [hyperfine](https://github.com/sharkdp/hyperfine) - this
 - As expected, the read based bash implementation is the worst performing.
 - Interestingly, the command substitution bash reading seems faster in every case, compared to the non-forking array loading.
 - The awk version performed reasonably well, being slightly more consistant than some bash versions, but overall is neither here nor there.
+
+One thing worth noting: /proc/cpuinfo is quite short on my machine, as it has only 4 cores.
+It'd be interesting to see the results on a machine with more resources.

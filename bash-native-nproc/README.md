@@ -102,7 +102,7 @@ Will this be better? I have no idea.
 Being able to load cpuinfo's content as a string gave me another idea, and our last candidate for now:
 ```
 #!/usr/bin/env bash
-# nproc_bash_pattern_count.sh
+# nproc_bash_pattern_count_fork.sh
 count=0
 pattern='processor'
 file=$(</proc/cpuinfo)
@@ -113,23 +113,32 @@ echo $count
 Rather than traverse the lines and check for a pattern match, we can directly count the number of matches we have in the file.
 Seeing an implementation in bash without any loops is quite notable.
 
+While a bit more verbose, we could apply the same principle to the version that loaded the file into an array, we'd just have to stringify the result
+```
+#!/usr/bin/env bash
+# nproc_bash_pattern_count_map.sh
+pattern='processor'
+mapfile </proc/cpuinfo file
+temp1="${file[*]}"
+temp2="${file[*]//${pattern}/}"
+(( count = (${#temp1} - ${#temp2}) / ${#pattern} ))
+echo $count
+```
+
 I ran a benchmark using [hyperfine](https://github.com/sharkdp/hyperfine) - this should be enough for exploratory data:
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
 |:---|---:|---:|---:|---:|
-| `nproc_awk.sh` | 6.9 ± 3.8 | 4.0 | 21.3 | 1.63 ± 1.64 |
-| `nproc_bash_fork.sh` | 6.9 ± 4.8 | 3.3 | 22.9 | 1.63 ± 1.78 |
-| `nproc_bash_map.sh` | 7.1 ± 4.6 | 3.6 | 24.7 | 1.68 ± 1.79 |
-| `nproc_bash_pattern_count.sh` | 4.2 ± 3.6 | 1.9 | 18.7 | 1.00 |
-| `nproc_bash_read.sh` | 17.4 ± 6.6 | 8.9 | 31.5 | 4.12 ± 3.80 |
-| `nproc_bin.sh` | 4.8 ± 3.4 | 2.3 | 15.7 | 1.14 ± 1.25 |
-| `nproc_grep.sh` | 5.0 ± 3.5 | 3.0 | 23.0 | 1.18 ± 1.30 |
+| `nproc_awk.sh` | 5.7 ± 3.6 | 2.8 | 20.1 | 1.82 ± 2.13 |
+| `nproc_bash_fork.sh` | 5.6 ± 4.5 | 2.6 | 22.0 | 1.77 ± 2.24 |
+| `nproc_bash_map.sh` | 6.3 ± 4.4 | 3.0 | 23.4 | 1.99 ± 2.40 |
+| `nproc_bash_pattern_count_fork.sh` | 3.2 ± 3.1 | 1.2 | 15.2 | 1.00 |
+| `nproc_bash_pattern_count_map.sh` | 3.3 ± 3.0 | 1.4 | 16.0 | 1.06 ± 1.40 |
+| `nproc_bash_read.sh` | 15.8 ± 6.8 | 8.0 | 33.4 | 5.02 ± 5.41 |
+| `nproc_bin.sh` | 3.7 ± 3.1 | 1.8 | 20.5 | 1.18 ± 1.53 |
+| `nproc_grep.sh` | 4.0 ± 3.3 | 2.2 | 21.1 | 1.26 ± 1.63 |
 
-Most results are to be expected, but I most definetly didn't expect a bash version to overtake the nproc binary!
-
-Grep actually performed quite similarily to nproc, meaning nproc's specialization doesn't help it much.
-
-As expected, the read based bash implementation is the worst performing.
-
-The fork and map bash implementations are very close. Interestingly, the forking version is actualy faster, though this might be a fluke.
-
-The awk version performed reasonably well, being slightly more consistant than the bash versions, but overall is neither here nor there.
+- Most results are to be expected, but I most definetly didn't expect a bash version to overtake the nproc binary!
+- grep actually performed quite similarily to nproc, meaning nproc's specialization doesn't help it much.
+- As expected, the read based bash implementation is the worst performing.
+- Interestingly, the command substitution bash reading seems faster in every case, compared to the non-forking array loading.
+- The awk version performed reasonably well, being slightly more consistant than some bash versions, but overall is neither here nor there.

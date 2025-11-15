@@ -78,7 +78,7 @@ echo $count
 In this variation, we use mapfile to load the entire file into memory as an array.
 /proc/cpuinfo is relatively small, so we can afford the memory,
 but this still traverses the file line by line to find matches.
-Still, at the cost of some memory we sinificantly reduced the number of syscalls required to read the file,
+Still, at the cost of some memory we significantly reduced the number of syscalls required to read the file,
 so we likely reduced our system time (and overall execution time).
 
 ```

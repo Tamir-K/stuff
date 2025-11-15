@@ -99,7 +99,7 @@ I was actualy very surprised I couldn't find a way to read a file's content as a
 
 Will this be better? I have no idea.
 
-Being able to load cpuinfo's content as a string gave me another idea, and our last candidate for now:
+Being able to load cpuinfo's content as a string gave me another idea:
 ```
 #!/usr/bin/env bash
 # nproc_bash_pattern_count_fork.sh

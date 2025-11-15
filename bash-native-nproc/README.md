@@ -113,7 +113,7 @@ echo $count
 Rather than traverse the lined and check for a pattern match, we can directly count the number of matches we have in the file.
 Seeing an implementation in bash without any loops is quite notable.
 
-I ran a benchmark using [hyperfine](https://github.com/sharkdp/hyperfine) this should be enough for exploratory data:
+I ran a benchmark using [hyperfine](https://github.com/sharkdp/hyperfine) - this should be enough for exploratory data:
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
 |:---|---:|---:|---:|---:|
 | `nproc_awk.sh` | 6.9 ± 3.8 | 4.0 | 21.3 | 1.63 ± 1.64 |

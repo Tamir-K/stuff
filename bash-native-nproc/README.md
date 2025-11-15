@@ -58,7 +58,7 @@ done < /proc/cpuinfo
 
 echo $count
 ```
-Using a classic bash approach to reading a file, we traverse each line in cpuinfo,
+Using a classic bash approach for reading a file, we traverse each line in cpuinfo,
 check if we get a pattern match, and if so, increment our count by 1. Nothing special.
 Our pattern matching here works, as thankfully, /proc/cpuinfo only has a single field per line.
 While this seems to be quite memory efficient, due to holding only a single line in memory at any given moment,

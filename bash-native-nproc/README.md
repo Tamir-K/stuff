@@ -110,7 +110,7 @@ temp="${file//${pattern}/}"
 ((count += (${#file} - ${#temp}) / ${#pattern}))
 echo $count
 ```
-Rather than traverse the lined and check for a pattern match, we can directly count the number of matches we have in the file.
+Rather than traverse the lines and check for a pattern match, we can directly count the number of matches we have in the file.
 Seeing an implementation in bash without any loops is quite notable.
 
 I ran a benchmark using [hyperfine](https://github.com/sharkdp/hyperfine) - this should be enough for exploratory data:

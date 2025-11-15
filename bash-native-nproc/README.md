@@ -124,7 +124,7 @@ I ran a benchmark using [hyperfine](https://github.com/sharkdp/hyperfine) this s
 | `nproc_bin.sh` | 4.8 ± 3.4 | 2.3 | 15.7 | 1.14 ± 1.25 |
 | `nproc_grep.sh` | 5.0 ± 3.5 | 3.0 | 23.0 | 1.18 ± 1.30 |
 
-Most results are expected, but I most definetly didn't expect a bash version to overtake the nproc binary!
+Most results are to be expected, but I most definetly didn't expect a bash version to overtake the nproc binary!
 
 Grep actually performed quite similarily to nproc, meaning nproc's specialization doesn't help it much.
 

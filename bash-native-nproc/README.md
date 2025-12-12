@@ -41,7 +41,7 @@ reimplementing in bash, for which we have several examples.
 
 The main reason I strive to reimplement things in bash, is the advantage it has as the shell I use to interface with my PC:
 solutions built using bash native tools, without external binaries, run within the bash process that called them,
-thus avoid the overhead of forking into another process
+thus avoiding the overhead of forking into another process
 (Yes, I'm actually trying to achieve decent performance with bash,
 at least decent enough to justify decluttering and getting rid of other specialized tools.
 Crazy, I know).

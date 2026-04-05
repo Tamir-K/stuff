@@ -6,7 +6,7 @@
 ## Indicators & metadata
 - **Redirect chain:**  
   - hxxps[:]//share[.]google/GVTYMEMANZWqTptr2  
-  - hxxps[:]//www.google[.]com/share.google?q=GVTYMEMANZWqTptr2  
+  - hxxps[:]//www.google[.]com/share[.]google?q=GVTYMEMANZWqTptr2  
   - hxxps[:]//fumigacionesdeaguascalientes[.]com/recoil/temporality?_r=0de9399d
 - **Domain(s):** fumigacionesdeaguascalientes[.]com  
 - **SHA256 (raw saved file):** e19212797c7244fabd38f4505aef6952b6fa1fa70b66eb853b5d1b34490c4d24  
